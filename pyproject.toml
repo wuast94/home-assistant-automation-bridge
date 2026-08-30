@@ -1,6 +1,6 @@
 [project]
 name = "home-assistant-automation-bridge"
-version = "0.1.5"
+version = "0.1.6"
 description = "Dynamic Home Assistant entities for an external automation runtime"
 requires-python = "==3.14.7.*"
 dependencies = []
