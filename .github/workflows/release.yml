@@ -30,7 +30,7 @@ jobs:
       - name: Build HACS archive
         run: |
           cd custom_components/wuast_automation_bridge
-          zip -9 -r ../../../wuast_automation_bridge.zip .
+          zip -9 -r ../../wuast_automation_bridge.zip .
       - name: Create GitHub release
         uses: softprops/action-gh-release@v2
         with:
