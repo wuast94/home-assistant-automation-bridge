@@ -45,7 +45,9 @@ class BridgeSwitch(BridgeEntity, SwitchEntity):
 class BridgeLight(BridgeEntity, LightEntity):
     def __init__(self, registry: Any, definition: Any) -> None:
         super().__init__(registry, definition)
-        self._attr_supported_color_modes = {ColorMode.ONOFF, ColorMode.BRIGHTNESS}
+        self._attr_supported_color_modes = {
+            ColorMode.BRIGHTNESS if ATTR_BRIGHTNESS in definition.attributes else ColorMode.ONOFF
+        }
 
     @property
     def is_on(self) -> bool | None:

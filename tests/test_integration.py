@@ -49,3 +49,20 @@ async def test_switch_is_stateful_toggle(hass: HomeAssistant) -> None:
     assert state.state == "off"
     assert state.attributes["icon"] == "mdi:lightbulb"
     assert "device_class" not in state.attributes
+
+
+@pytest.mark.usefixtures("enable_custom_integrations")
+async def test_onoff_light_is_created(hass: HomeAssistant) -> None:
+    entry = MockConfigEntry(domain=DOMAIN, unique_id=DOMAIN, data={})
+    entry.add_to_hass(hass)
+    assert await hass.config_entries.async_setup(entry.entry_id)
+    await hass.async_block_till_done()
+
+    definition = {"unique_id": "test-light", "platform": "light", "name": "Spot", "state": False}
+    await hass.services.async_call(DOMAIN, "create_entity", {"definition": definition}, blocking=True)
+    await hass.services.async_call(DOMAIN, "runtime_status", {"available": True}, blocking=True)
+    await hass.async_block_till_done()
+    state = hass.states.get("light.automation_runtime_spot")
+    assert state is not None
+    assert state.state == "off"
+    assert state.attributes["supported_color_modes"] == ["onoff"]
