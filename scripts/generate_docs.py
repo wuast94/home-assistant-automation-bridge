@@ -82,13 +82,24 @@ def markdown(services: dict[str, Any]) -> str:
         else:
             default = "empty collection"
         lines.append(f"| `{item.name}` | `{type_name(item.type)}` | {'yes' if required else 'no'} | {default} |")
-    lines.extend([
-        "", f"Platforms: {', '.join(f'`{item}`' for item in PLATFORMS)}.", "", "## Home Assistant actions", "",
-    ])
+    lines.extend(
+        [
+            "",
+            f"Platforms: {', '.join(f'`{item}`' for item in PLATFORMS)}.",
+            "",
+            "## Home Assistant actions",
+            "",
+        ]
+    )
     for service, definition in services.items():
-        lines.extend([
-            f"### `{service}` — {definition.get('name', service)}", "", definition.get("description", ""), "",
-        ])
+        lines.extend(
+            [
+                f"### `{service}` — {definition.get('name', service)}",
+                "",
+                definition.get("description", ""),
+                "",
+            ]
+        )
         service_fields = definition.get("fields", {})
         if service_fields:
             lines.extend(["| Field | Required | Selector |", "|---|---:|---|"])
@@ -97,21 +108,35 @@ def markdown(services: dict[str, Any]) -> str:
                 lines.append(f"| `{name}` | {'yes' if field_definition.get('required') else 'no'} | `{selector}` |")
             lines.append("")
         if service in {"create_entity", "update_entity"}:
-            lines.extend([
-                "```json",
-                (
-                    '{"definition":{"unique_id":"room-temperature","platform":"sensor",'
-                    '"name":"Temperature","state":21.5}}'
-                ),
-                "```", "",
-            ])
-    lines.extend([
-        "## Entity command event", "", f"Controllable entities emit `{EVENT_COMMAND}`.", "", "```json",
-        '{"correlation_id":"…","unique_id":"runtime-switch","platform":"switch","command":"turn_on","value":null}',
-        "```", "", "Return the result with `command_result` before `command_timeout` expires.", "",
-        "## Machine-readable definition", "",
-        "See [`entity-definition.schema.json`](entity-definition.schema.json).", "",
-    ])
+            lines.extend(
+                [
+                    "```json",
+                    (
+                        '{"definition":{"unique_id":"room-temperature","platform":"sensor",'
+                        '"name":"Temperature","state":21.5}}'
+                    ),
+                    "```",
+                    "",
+                ]
+            )
+    lines.extend(
+        [
+            "## Entity command event",
+            "",
+            f"Controllable entities emit `{EVENT_COMMAND}`.",
+            "",
+            "```json",
+            '{"correlation_id":"…","unique_id":"runtime-switch","platform":"switch","command":"turn_on","value":null}',
+            "```",
+            "",
+            "Return the result with `command_result` before `command_timeout` expires.",
+            "",
+            "## Machine-readable definition",
+            "",
+            "See [`entity-definition.schema.json`](entity-definition.schema.json).",
+            "",
+        ]
+    )
     return "\n".join(lines)
 
 

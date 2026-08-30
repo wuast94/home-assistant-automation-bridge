@@ -17,4 +17,3 @@ class AutomationBridgeConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         if user_input is not None:
             return self.async_create_entry(title="Wuast Automation Bridge", data={})
         return self.async_show_form(step_id="user", data_schema=vol.Schema({}))
-

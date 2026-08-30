@@ -8,4 +8,3 @@ STORAGE_KEY: Final = f"{DOMAIN}.entities"
 STORAGE_VERSION: Final = 1
 EVENT_COMMAND: Final = f"{DOMAIN}_command"
 DEFAULT_COMMAND_TIMEOUT: Final = 10.0
-

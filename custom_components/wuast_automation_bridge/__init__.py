@@ -12,23 +12,35 @@ from .const import DEFAULT_COMMAND_TIMEOUT, DOMAIN, PLATFORMS
 from .models import BridgeConfigEntry, BridgeData, EntityDefinition
 from .registry import BridgeRegistry
 
-CREATE_SCHEMA = vol.Schema({vol.Required("definition"): {
-    vol.Required("unique_id"): cv.string, vol.Required("platform"): vol.In(PLATFORMS),
-    vol.Required(CONF_NAME): cv.string, vol.Optional("state"): object,
-    vol.Optional("attributes", default={}): dict,
-    vol.Optional("device_identifier", default="automation-runtime"): cv.string,
-    vol.Optional("device_name", default="Automation Runtime"): cv.string,
-    vol.Optional("options", default=[]): [cv.string],
-    vol.Optional("minimum", default=0.0): vol.Coerce(float),
-    vol.Optional("maximum", default=100.0): vol.Coerce(float),
-    vol.Optional("step", default=1.0): vol.Coerce(float),
-    vol.Optional("command_timeout", default=DEFAULT_COMMAND_TIMEOUT): vol.All(vol.Coerce(float), vol.Range(min=0.1)),
-}})
+CREATE_SCHEMA = vol.Schema(
+    {
+        vol.Required("definition"): {
+            vol.Required("unique_id"): cv.string,
+            vol.Required("platform"): vol.In(PLATFORMS),
+            vol.Required(CONF_NAME): cv.string,
+            vol.Optional("state"): object,
+            vol.Optional("attributes", default={}): dict,
+            vol.Optional("device_identifier", default="automation-runtime"): cv.string,
+            vol.Optional("device_name", default="Automation Runtime"): cv.string,
+            vol.Optional("options", default=[]): [cv.string],
+            vol.Optional("minimum", default=0.0): vol.Coerce(float),
+            vol.Optional("maximum", default=100.0): vol.Coerce(float),
+            vol.Optional("step", default=1.0): vol.Coerce(float),
+            vol.Optional("command_timeout", default=DEFAULT_COMMAND_TIMEOUT): vol.All(
+                vol.Coerce(float), vol.Range(min=0.1)
+            ),
+        }
+    }
+)
 REMOVE_SCHEMA = vol.Schema({vol.Required("unique_id"): cv.string})
-RESULT_SCHEMA = vol.Schema({
-    vol.Required("correlation_id"): cv.string, vol.Required("success"): cv.boolean,
-    vol.Optional("state"): object, vol.Optional("error"): cv.string,
-})
+RESULT_SCHEMA = vol.Schema(
+    {
+        vol.Required("correlation_id"): cv.string,
+        vol.Required("success"): cv.boolean,
+        vol.Optional("state"): object,
+        vol.Optional("error"): cv.string,
+    }
+)
 STATUS_SCHEMA = vol.Schema({vol.Required("available"): cv.boolean})
 
 
@@ -54,7 +66,12 @@ async def async_unload_entry(hass: HomeAssistant, entry: BridgeConfigEntry) -> b
     unloaded = await hass.config_entries.async_unload_platforms(entry, PLATFORMS)
     if unloaded:
         services = (
-            "create_entity", "update_entity", "remove_entity", "command_result", "runtime_status", "list_entities",
+            "create_entity",
+            "update_entity",
+            "remove_entity",
+            "command_result",
+            "runtime_status",
+            "list_entities",
         )
         for service in services:
             hass.services.async_remove(DOMAIN, service)

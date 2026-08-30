@@ -49,4 +49,3 @@ class BridgeData:
 
 
 type BridgeConfigEntry = ConfigEntry[BridgeData]
-

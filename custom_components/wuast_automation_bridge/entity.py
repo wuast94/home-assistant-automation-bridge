@@ -66,4 +66,3 @@ class BridgeEntity(Entity):
         if "state" in result:
             updated = EntityDefinition.from_dict({**self.definition.as_dict(), "state": result["state"]})
             await self.registry.async_update(updated)
-

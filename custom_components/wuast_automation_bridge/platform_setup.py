@@ -14,4 +14,3 @@ async def async_setup_bridge_platform(
     platform: str,
 ) -> None:
     entry.runtime_data.registry.register_platform(platform, async_add_entities, ENTITY_FACTORIES[platform])
-
