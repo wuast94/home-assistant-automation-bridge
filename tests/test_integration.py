@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import pytest
-from homeassistant.components.switch import SwitchDeviceClass
 from homeassistant.core import HomeAssistant
 from pytest_homeassistant_custom_component.common import MockConfigEntry
 
@@ -48,4 +47,5 @@ async def test_switch_is_stateful_toggle(hass: HomeAssistant) -> None:
     state = hass.states.get("switch.automation_runtime_spot")
     assert state is not None
     assert state.state == "off"
-    assert state.attributes["device_class"] == SwitchDeviceClass.SWITCH
+    assert state.attributes["icon"] == "mdi:lightbulb"
+    assert "device_class" not in state.attributes

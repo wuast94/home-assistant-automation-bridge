@@ -8,7 +8,7 @@ from homeassistant.components.light import ATTR_BRIGHTNESS, ColorMode, LightEnti
 from homeassistant.components.number import NumberEntity
 from homeassistant.components.select import SelectEntity
 from homeassistant.components.sensor import SensorEntity
-from homeassistant.components.switch import SwitchDeviceClass, SwitchEntity
+from homeassistant.components.switch import SwitchEntity
 from homeassistant.components.text import TextEntity
 
 from .entity import BridgeEntity
@@ -28,8 +28,8 @@ class BridgeBinarySensor(BridgeEntity, BinarySensorEntity):
 
 class BridgeSwitch(BridgeEntity, SwitchEntity):
     @property
-    def device_class(self) -> SwitchDeviceClass:
-        return SwitchDeviceClass.SWITCH
+    def icon(self) -> str:
+        return "mdi:lightbulb"
 
     @property
     def is_on(self) -> bool | None:
