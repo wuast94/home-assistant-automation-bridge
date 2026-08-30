@@ -40,7 +40,7 @@ class BridgeEntity(Entity):
         self.definition = definition
         self._attr_name = definition.name
         self._attr_extra_state_attributes = dict(definition.attributes)
-        if self.hass is not None:
+        if self.hass is not None and self.entity_id is not None:
             self.async_write_ha_state()
 
     async def async_command(self, command: str, value: Any = None) -> None:

@@ -53,7 +53,9 @@ class BridgeRegistry:
         self.definitions[definition.unique_id] = definition
         await self.async_save()
         if existing is not None:
-            self.entities[definition.unique_id].apply_definition(definition)
+            entity = self.entities.get(definition.unique_id)
+            if entity is not None:
+                entity.apply_definition(definition)
             return
         if adder := self.adders.get(definition.platform):
             from .platforms import ENTITY_FACTORIES
