@@ -1,0 +1,40 @@
+create_entity:
+  fields:
+    definition:
+      required: true
+      selector:
+        object:
+update_entity:
+  fields:
+    definition:
+      required: true
+      selector:
+        object:
+remove_entity:
+  fields:
+    unique_id:
+      required: true
+      selector:
+        text:
+command_result:
+  fields:
+    correlation_id:
+      required: true
+      selector:
+        text:
+    success:
+      required: true
+      selector:
+        boolean:
+    state:
+      selector:
+        object:
+    error:
+      selector:
+        text:
+runtime_status:
+  fields:
+    available:
+      required: true
+      selector:
+        boolean:

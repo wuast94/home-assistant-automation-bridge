@@ -1,6 +1,16 @@
-# Home Assistant Automation Bridge
+# Wuast Automation Bridge
 
-Private Home-Assistant-Custom-Integration for the worker3 automation runtime.
+Home Assistant custom integration for dynamic entities controlled by an external,
+self-hosted Python automation runtime. It has no third-party runtime dependencies.
 
-The implementation plan and operational context are stored in `/root/home-automation/PLAN.md` on worker3.
+Install it with HACS as a custom integration, restart Home Assistant, then add
+**Wuast Automation Bridge** once from Settings → Devices & services.
 
+The authenticated Home Assistant WebSocket API is the only transport. The runtime
+calls the integration actions to create, update, and remove entities. Commands from
+controllable entities are emitted as `wuast_automation_bridge_command` events and
+must be answered with a correlated `command_result` action.
+
+Supported platforms are sensor, binary sensor, switch, light, button, number,
+select, and text. Definitions persist in Home Assistant and retain their stable
+`unique_id` across restarts.
