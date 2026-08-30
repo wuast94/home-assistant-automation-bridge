@@ -51,5 +51,3 @@ runtime_status:
 list_entities:
   name: List entities
   description: Return all persisted entity definitions for reconciliation and diagnostics.
-  response:
-    optional: false

@@ -35,15 +35,18 @@ check: sync format docs lint types test docs-check
 ci: sync lint types test docs-check
     git diff --check
 
-# Prepare, validate, push, and tag a release. The tag triggers GitHub Actions.
-release version:
-    .venv/bin/python scripts/prepare_release.py "{{version}}"
+# Automatically prepare, validate, push, and tag the next patch release.
+release:
+    #!/usr/bin/env zsh
+    set -euo pipefail
+    version=$(.venv/bin/python scripts/prepare_release.py)
     {{uv}} lock
     just check
     git add custom_components/wuast_automation_bridge/manifest.json pyproject.toml uv.lock
-    git commit -m "chore: prepare release v{{version}}"
+    git commit -m "chore: prepare release v${version}"
     git push origin main
     git push forgejo main
-    git tag -a "v{{version}}" -m "Wuast Automation Bridge {{version}}"
-    git push origin "v{{version}}"
-    git push forgejo "v{{version}}"
+    git tag -a "v${version}" -m "Wuast Automation Bridge ${version}"
+    git push origin "v${version}"
+    git push forgejo "v${version}"
+    echo "Release v${version} triggered"
