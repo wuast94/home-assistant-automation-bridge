@@ -56,7 +56,7 @@ class BridgeRegistry:
             entity = self.entities.get(definition.unique_id)
             if entity is not None:
                 entity.apply_definition(definition)
-            return
+                return
         if adder := self.adders.get(definition.platform):
             from .platforms import ENTITY_FACTORIES
 
@@ -76,8 +76,8 @@ class BridgeRegistry:
         await self.async_save()
         if entity := self.entities.pop(unique_id, None):
             entity_id = entity.entity_id
-            await entity.async_remove(force_remove=True)
             if entity_id:
+                await entity.async_remove(force_remove=True)
                 registry = er.async_get(self.hass)
                 if registry.async_get(entity_id):
                     registry.async_remove(entity_id)
@@ -100,5 +100,5 @@ class BridgeRegistry:
     def set_runtime_available(self, available: bool) -> None:
         self.runtime_available = available
         for entity in self.entities.values():
-            if entity.hass is not None:
+            if entity.hass is not None and entity.entity_id is not None:
                 entity.async_write_ha_state()
