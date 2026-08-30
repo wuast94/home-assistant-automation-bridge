@@ -995,7 +995,7 @@ wheels = [
 
 [[package]]
 name = "home-assistant-automation-bridge"
-version = "0.1.0"
+version = "0.1.1"
 source = { editable = "." }
 
 [package.dev-dependencies]
@@ -1005,6 +1005,7 @@ dev = [
     { name = "pytest" },
     { name = "pytest-asyncio" },
     { name = "pytest-homeassistant-custom-component" },
+    { name = "pyyaml" },
     { name = "ruff" },
 ]
 
@@ -1017,6 +1018,7 @@ dev = [
     { name = "pytest", specifier = ">=8.4.0" },
     { name = "pytest-asyncio", specifier = ">=1.1.0" },
     { name = "pytest-homeassistant-custom-component", specifier = ">=0.13.300" },
+    { name = "pyyaml", specifier = ">=6.0.2" },
     { name = "ruff", specifier = ">=0.12.0" },
 ]
 

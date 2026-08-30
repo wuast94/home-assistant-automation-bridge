@@ -1,0 +1,62 @@
+{
+  "$id": "https://github.com/wuast94/home-assistant-automation-bridge/entity-definition.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "attributes": {
+      "type": "object"
+    },
+    "command_timeout": {
+      "exclusiveMinimum": 0,
+      "type": "number"
+    },
+    "device_identifier": {
+      "type": "string"
+    },
+    "device_name": {
+      "type": "string"
+    },
+    "maximum": {
+      "type": "number"
+    },
+    "minimum": {
+      "type": "number"
+    },
+    "name": {
+      "type": "string"
+    },
+    "options": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "platform": {
+      "enum": [
+        "sensor",
+        "binary_sensor",
+        "switch",
+        "light",
+        "button",
+        "number",
+        "select",
+        "text"
+      ],
+      "type": "string"
+    },
+    "state": {},
+    "step": {
+      "type": "number"
+    },
+    "unique_id": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "unique_id",
+    "platform",
+    "name"
+  ],
+  "title": "Wuast Automation Bridge entity definition",
+  "type": "object"
+}

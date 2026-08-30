@@ -1,22 +1,30 @@
 create_entity:
+  name: Create entity
+  description: Create a persisted dynamic entity, or reconcile an entity with the same unique ID.
   fields:
     definition:
       required: true
       selector:
         object:
 update_entity:
+  name: Update entity
+  description: Update selected fields of an existing entity definition.
   fields:
     definition:
       required: true
       selector:
         object:
 remove_entity:
+  name: Remove entity
+  description: Remove an entity definition, state, and entity-registry entry.
   fields:
     unique_id:
       required: true
       selector:
         text:
 command_result:
+  name: Return command result
+  description: Complete a pending entity command using its correlation ID.
   fields:
     correlation_id:
       required: true
@@ -33,8 +41,15 @@ command_result:
       selector:
         text:
 runtime_status:
+  name: Set runtime status
+  description: Mark all bridge entities available or unavailable.
   fields:
     available:
       required: true
       selector:
         boolean:
+list_entities:
+  name: List entities
+  description: Return all persisted entity definitions for reconciliation and diagnostics.
+  response:
+    optional: false

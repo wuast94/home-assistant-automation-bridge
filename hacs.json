@@ -1,4 +1,6 @@
 {
+  "filename": "wuast_automation_bridge.zip",
   "name": "Wuast Automation Bridge",
-  "render_readme": true
+  "render_readme": true,
+  "zip_release": true
 }
